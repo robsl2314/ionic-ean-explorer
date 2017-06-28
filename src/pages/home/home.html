@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      EAN - Explorer
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-card *ngIf="noData" class="error">
+    <ion-card-header>
+      Fehler
+    </ion-card-header>
+    <ion-card-content>
+      <p>Zu diesem EAN Code gibt es noch keine Informationen</p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="gotInformation" class="success">
+    <ion-card-header>
+      {{ title }}
+    </ion-card-header>
+    <ion-card-content>
+      <p *ngFor="let attribute of attributes">{{ attribute.title }}: {{ attribute.text }}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <button (click)="scan()" ion-button block>Scan</button>
+
+  <ion-card *ngIf="scanData">
+    <p>Scanned Text: {{ scanData.text }}</p>
+    <p>Scanned Format: {{ scanData.format }}</p>
+  </ion-card>
+
+  <ion-card *ngIf="debug">
+    <ion-card-header>DEBUG</ion-card-header>
+    <ion-card-content>{{ httpData }}</ion-card-content>
+  </ion-card>
+</ion-content>
